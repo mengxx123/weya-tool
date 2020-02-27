@@ -1,0 +1,80 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Document</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .all {
+      padding: 16px;
+    }
+    .textrea {
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+    }
+</style>
+</head>
+
+<body>
+  <div class="all">
+    <textarea class="textrea" id="input">富春街道	330111001000	
+      春江街道	330111002000	
+      鹿山街道	330111004000	
+      东洲街道	330111005000	
+      银湖街道	330111006000	
+      万市镇	330111100000	
+      洞桥镇	330111101000	
+      渌渚镇	330111103000	
+      永昌镇	330111105000	
+      里山镇	330111108000	
+      常绿镇	330111109000	
+      场口镇	330111110000	
+      常安镇	330111111000	
+      龙门镇	330111112000	
+      新登镇	330111115000	
+      胥口镇	330111116000	
+      大源镇	330111117000	
+      灵桥镇	330111118000	
+      新桐乡	330111200000	
+      上官乡	330111201000	
+      环山乡	330111204000	
+      湖源乡	330111205000	
+      春建乡	330111206000	
+      渔山乡	330111207000</textarea>
+      <br>
+    <button id="convert">转成 SQL</button>
+    <br>
+
+    <textarea class="textrea" id="result"></textarea>
+  </div>
+
+
+    <script>
+
+        
+
+        document.getElementById('convert').addEventListener('click', () => {
+          let text = document.getElementById('input').value
+        let arr = text.split('\n')
+        arr = arr.map(item => item.replace(/^\s+/g, '').replace(/\s+$/g, ''))
+        arr = arr.map(item => item.replace(/\s+/g, ' '))
+        arr = arr.map(item => {
+            let a = item.split(/\s/)
+            return {
+                name: a[0],
+                code: a[1].substring(0, a[1].length - 3),
+            }
+        })
+        arr = arr.map(item => "INSERT INTO `linxot`.`ncov_pot_area` (`code`, `name`, `county_code`) VALUES ('" + item.code + "', '" + item.name + "', '330111');")
+        console.log()
+        let result = arr.join('\n')
+        document.getElementById('result').value = result
+        })
+
+    </script>
+</body>
+</html>

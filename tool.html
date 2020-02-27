@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let text = `
+    科普	手机充电	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247489061&idx=2&sn=ce40a09699f9eb52999161c295f5563a&chksm=9775a8f1a00221e70124db71de7442e5a38d5de3690d34526601d3fa51a7f00e0641a0e58c01&scene=21
+科普	OLED屏和LCD屏	https://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247489108&idx=1&sn=b8f6c552eee4f9c6427168e6cdd26f59&chksm=9775a880a0022196b4ccc634a897cb788e5a59bf54b0a0a9b1d8ec8a07e57c6b8bf85a39ebd1&scene=21
+科普	软件监听	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247489048&idx=2&sn=b0829e142c88b87214abc66a92a34a85&chksm=9775a8cca00221da9dd0009fcd80c979fb63f9112dfc23aa395e283c2f77039ca0f1b0a89fb4&scene=21
+科普	大数据杀熟	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247488985&idx=1&sn=60bc8726a024c247d161ae0581d890a0&chksm=9775ab0da002221baf681dc87f076d6c41067121c60a2284d73cab0726658e23c63d4bcca7d2&scene=21
+科普	字体版权	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247488955&idx=1&sn=3a16fcdd2d9fb8821ded295b0a7f0d25&chksm=9775ab6fa00222794c60278ef031ae3a264942031d0ef113d2114227e98a6bdeb52dd16fadf1&scene=21
+科普	防骚扰	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247489023&idx=1&sn=f7f743617e58f36d990092971b1a1a37&chksm=9775ab2ba002223d968056c51c7b17d4febd70a20a807cbc5d2d653bc889e3c38c306553da7b&scene=21
+科普	相互宝	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247488311&idx=1&sn=f7110acbd517f86fd1453b81eb361795&chksm=9775ade3a00224f5801880d7e697805878d821bfa48cd8fb318aac86c35bc4ee16f01e376eec&scene=21
+
+`
+function removeFirst(text) {
+    return text.replace(/^[\d\D]+?\s+/, '')
+}
+
+  let arr = text.split('\n').filter(item => item.replace(/\s/g, ''))
+  arr = arr.map(item => {
+    let text = item.replace('科普', '')
+    // console.log('text', text.replace(/^\s+/, '').split(/\s+/))
+    let name = (text.replace(/^\s+/, '').split(/\s+/))[0]
+    let url = text.replace(name, '').replace(/^\s+/, '').replace(/\s+$/, '')
+    return {
+      name,
+      url
+    }
+  })
+  console.log('arr', arr)
+  console.log('json', JSON.stringify(arr))
+
+    
+    </script>
+</body>
+</html>

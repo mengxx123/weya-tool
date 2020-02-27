@@ -1,0 +1,117 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Untitled Document</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .all {
+      padding: 16px;
+    }
+    .textrea {
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+    }
+</style>
+</head>
+
+<body>
+  <div class="all">
+    <textarea class="textrea" id="input">微信、支付宝	微信隐藏功能	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247488056&idx=1&sn=376852e70bf27e2cac83bd6e34ea0454&chksm=9775aceca00225fa33f594b090670f4dd2ac0459b970f84b914cde740c3bd75960fed1081928&scene=21
+      微信、支付宝	支付宝隐藏功能	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247488998&idx=1&sn=140544c91f1397da13c29f7662bc4a21&chksm=9775ab32a0022224c85d95a753d066f35a868489349d8644d10a4c8efec0cd19107b7837f8d2&scene=21
+      
+      iPhone	捷径教程	http://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247488028&idx=1&sn=3b165cff961b41bae14f38704ecf772f&chksm=9775acc8a00225ded3807c9461781a305fc621fe57b9e0280e566a19e6d5fab496312af165b1&scene=21
+      iPhone	捷径合集	https://mp.weixin.qq.com/s?__biz=MzIwOTM2NTk0Nw==&mid=2247489307&idx=1&sn=40e7ccd86c588b2aed54b1db9257ad45&chksm=9775a9cfa00220d9eb928b75f66e6ddbbf7c337905c0581d7f962e51d8eda07a70759ac35984&scene=21
+
+    </textarea>
+      <br>
+    <button id="convert">转成 JSON</button>
+    <br>
+
+    <textarea class="textrea" id="result"></textarea>
+  </div>
+
+
+    <script>
+      function convert(text) {
+        let arr = text.split('\n')
+        arr = arr.map(item => item.replace(/^\s+/g, '').replace(/\s+$/g, ''))
+        arr = arr.filter(item => item)
+        console.log('arr', arr)
+        let results = [
+          {
+                name: '微信、支付宝',
+                icon: '/static/images/tool/wechat.png',
+                color: '#00b259',
+                tools: [],
+                // {"name":"微信隐藏功能",
+                // "url":""
+                // ]
+            },
+            {
+                name: 'iPhone',
+                icon: '/static/images/tool/iphone.png',
+                color: '#ffb000',
+                tools: [],
+            },
+            {
+                name: 'App',
+                icon: '/static/images/tool/app.png',
+                color: '#0080ff',
+                tools: [],
+            },
+            {
+                name: '选机指南',
+                icon: '/static/images/tool/guide.png',
+                color: '#542ef6',
+                tools: [],
+               
+            },
+            {
+                name: '攻略',
+                icon: '/static/images/tool/gonglue.png',
+                color: '#ff8a00',
+                tools: [],
+               
+            },
+            {
+                name: '科普',
+                icon: '/static/images/tool/kepu.png',
+                color: '#02c7a4',
+                tools: [],
+               
+            },
+          ] 
+        for (let item of arr) {
+          // console.log()
+          let splitArr = item.split(/\s+/)
+          let parent = results.find(item => item.name === splitArr[0])
+          if (parent) {
+            parent.tools.push({
+              name: splitArr[1],
+              url: splitArr[2]
+            })
+          } else {
+            console.err('找不到' + item)
+          }
+        }
+
+        return results
+      }
+      
+
+        
+
+        document.getElementById('convert').addEventListener('click', () => {
+          let text = document.getElementById('input').value
+          console.log('convert', )
+          document.getElementById('result').value = JSON.stringify(convert(text))
+        })
+
+    </script>
+</body>
+</html>
